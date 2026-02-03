@@ -8,6 +8,10 @@ app.listen(port, () => {
   console.log('Listening on port', port);
 });
 
+app.get('/health', (req, res) => {
+  res.send('email-service Health status: OK \n\n');
+});
+
 app.post('/', async (req, res) => {
   const labReport = decodeBase64Json(req.body.message.data);
   try {

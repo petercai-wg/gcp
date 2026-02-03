@@ -1,0 +1,8 @@
+{
+  "name": "function email pub-sub",
+  "version": "1.0.0",
+  "description": "cloud function to send email on pub-sub trigger",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.0.0"
+  }
+}

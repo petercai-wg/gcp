@@ -1,0 +1,5 @@
+runtime: nodejs24
+service: helloworldstandard
+
+env_variables:
+  APPTYPE: Standard

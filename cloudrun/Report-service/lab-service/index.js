@@ -11,7 +11,7 @@ app.listen(port, () => {
 });
 
 app.get('/about', (req, res) => {
-  res.send('About lab-service status: OK');
+  res.send('About lab-service status: OK \n\n');
 });
 
 app.post('/', async (req, res) => {

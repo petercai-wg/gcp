@@ -1,0 +1,17 @@
+{
+    "name": "appengine-hello-apps",
+    "version": "0.1.0",
+    "description": "Node.js sample on App Engine",
+    "private": true,
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "deploy": "gcloud app deploy"
+    },
+    "engines": {
+        "node": "24.x.x"
+    },
+    "dependencies": {
+        "express": "^4.18.2"
+    }
+}
