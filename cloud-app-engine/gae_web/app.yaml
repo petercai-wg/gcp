@@ -1,0 +1,5 @@
+runtime: python312
+service: standard-py-demo
+
+env_variables:
+  APPTYPE: Standard
