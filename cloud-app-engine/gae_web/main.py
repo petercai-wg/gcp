@@ -12,7 +12,14 @@ appType = os.getenv("APPTYPE", "default")
 @app.route("/")
 def hello_world():
     hostname = platform.node()
-    return render_template("index.html", hostname=hostname, appType=appType)
+    data = {
+        "title": "Dynamic Content from Server",
+        "items": ["Item A", "Item B", "Item C"],
+    }
+
+    return render_template(
+        "index.html", hostname=hostname, appType=appType, server_data=data
+    )
 
 
 # Run the Flask application if this file is executed directly
