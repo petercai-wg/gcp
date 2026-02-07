@@ -1,0 +1,14 @@
+
+### Django ###
+__pycache__/
+
+staticfiles/
+
+.env_*
+.venv
+*.pyc
+
+### VS Code ###
+.vscode/
+
+

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+{% load my_tags %}
+
+<head>
+    <title>My Home page: {% get_env_var "APPTYPE" %}</title>
+</head>
+
+<body>
+    <p>Hello GCP Django! Env: {% get_env_var "APPTYPE" %}</p>
+    <p><a href="/polls/">Go to My Polls</a></p>
+</body>
+
+</html>

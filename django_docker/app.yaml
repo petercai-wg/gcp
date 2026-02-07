@@ -1,0 +1,18 @@
+runtime: python312
+###service: jdangonote
+
+entrypoint: gunicorn -b :$PORT mywebsite.wsgi:application
+
+handlers:
+- url: /static
+  static_dir: staticfiles
+
+- url: /.*
+  script: auto
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: 'mywebsite.settings'
+  APPTYPE: GAppEngine
+# vpc_access_connector:
+#   name: projects/<project-id>/locations/us-central1/connectors/myvmconnector  
+
