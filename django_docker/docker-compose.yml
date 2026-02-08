@@ -13,7 +13,7 @@ services:
     build: .
     container_name: django-web
     ports:
-      - "8000:8000"
+      - "5000:8080"
     volumes:
       - ./static:/app/staticfiles
     environment:
