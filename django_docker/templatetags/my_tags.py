@@ -1,5 +1,6 @@
 from django import template
 import os
+import platform
 
 register = template.Library()
 
@@ -12,3 +13,8 @@ register = template.Library()
 @register.simple_tag
 def get_env_var(key):
     return os.environ.get(key, "")
+
+
+@register.simple_tag
+def get_hostname():
+    return platform.node()

@@ -14,20 +14,17 @@
         </span>
       </div>
       <div class="w-full bg-gray-600 rounded-full h-2.5">
-        <div
-          class="bg-purple-600 h-2.5 rounded-full"
-          style="width: {% widthratio choice.votes question.choice_set.all|length 100 %}%"
-        ></div>
+        <div class="bg-purple-600 h-2.5 rounded-full"
+          style="width: {% widthratio choice.votes question.choice_set.all|length 100 %}%"></div>
       </div>
     </div>
     {% endfor %}
   </div>
 
-  <a
-    href="{% url 'polls:detail' question.id %}"
-    class="mt-6 block text-center bg-purple-600 text-white py-3 px-6 rounded-lg hover:bg-purple-700 transition duration-200"
-  >
+  <a href="{% url 'polls:detail' question.id %}"
+    class="mt-6 block text-center bg-purple-600 text-white py-3 px-6 rounded-lg hover:bg-purple-700 transition duration-200">
     Vote again?
   </a>
+  <a href="/polls/" class="mt-2 block text-center text-purple-400 hover:text-purple-300">Go to My Polls</a>
 </div>
 {% endblock %}
