@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: django-web
+  name: django-web
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: django-web
+  template:
+    metadata:
+      labels:
+        app: django-web
+    spec:
+      serviceAccountName: ksa-cloud-sql
+      containers:
+      - name: django-web
+        image: northamerica-northeast2-docker.pkg.dev/project-4d782c37-789b-47ab-97d/my-registry/django-web:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: APPTYPE
+          value: "GKE"
+        # To use TCP - Setting INSTANCE_HOST will use TCP (e.g., 127.0.0.1)
+        # To use Unix, use INSTANCE_UNIX_SOCKET (e.g., /cloudsql/proj:region:instance)
+        - name: DATABASE_HOST
+          value: "127.0.0.1"
+        - name: DATABASE_PASSWORD
+          value: "admin"
+        
+      - name: cloud-sql-proxy
+        image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:latest
+        command:
+        args:
+          - "--address=0.0.0.0"
+          - "--port=5432"
+          - "project-4d782c37-789b-47ab-97d:northamerica-northeast2:my-cloud-postgres"
+          - "--private-ip"
+        securityContext:
+          # The default Cloud SQL proxy image runs as the
+          # "nonroot" user and group (uid: 65532) by default.
+          runAsNonRoot: true  
+status:
+  availableReplicas: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
