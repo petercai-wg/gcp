@@ -13,6 +13,10 @@ handlers:
 env_variables:
   DJANGO_SETTINGS_MODULE: 'mywebsite.settings'
   APPTYPE: GAppEngine
-# vpc_access_connector:
-#   name: projects/<project-id>/locations/us-central1/connectors/myvmconnector  
+  DATABASE_HOST: /cloudsql/project-4d782c37-789b-47ab-97d:northamerica-northeast2:my-cloud-postgres
+  DATABASE_PASSWORD: admin
+
+
+vpc_access_connector:
+  name: projects/project-4d782c37-789b-47ab-97d/locations/us-central1/connectors/myusconnector
 
