@@ -1,5 +1,6 @@
 functions-framework
 google-cloud-storage
+google-cloud-secret-manager
 pg8000 
 cloud-sql-python-connector[pg8000]
 sqlalchemy

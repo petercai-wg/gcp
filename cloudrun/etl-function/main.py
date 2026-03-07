@@ -6,19 +6,12 @@ import os
 import sqlalchemy
 
 from google.cloud import storage
-from google.cloud.sql.connector import Connector, IPTypes
+from readSecrete import access_secret_version
 
 
 # Triggered by a change in a storage bucket
 @functions_framework.cloud_event
 def etl_csv_to_cloudsql(cloud_event):
-
-    # Environment variables
-    DB_USER = os.environ.get("DB_USER")
-    DB_PASS = os.environ.get("DB_PASS")
-    DB_NAME = os.environ.get("DB_NAME")
-    TABLE_NAME = os.environ.get("TABLE_NAME")
-    CLOUD_SQL_CONNECTION_NAME = os.environ.get("CLOUD_SQL_CONNECTION_NAME")
 
     data = cloud_event.data
 
@@ -41,8 +34,27 @@ def etl_csv_to_cloudsql(cloud_event):
 
     print(f"Processing file: {file_name} from bucket: {bucket_name}")
 
-    # Initialize Cloud Storage client
+    # Environment variables
+    PROJECT_ID = os.environ.get("PROJECT_ID")
+    DB_USER = os.environ.get("DB_USER")
+    SECRET_ID = f"{DB_USER}ql_password"
 
+    secret_value = access_secret_version(project_id=PROJECT_ID, secret_id=SECRET_ID)
+
+    print(
+        f"Get secret value for ID: {SECRET_ID} from Secret Manager in project: {PROJECT_ID}"
+    )
+
+    if secret_value is None:
+        print("Failed to retrieve secret value. Exiting function.")
+        return
+
+    DB_PASS = secret_value
+    DB_NAME = os.environ.get("DB_NAME")
+    TABLE_NAME = os.environ.get("TABLE_NAME")
+    CLOUD_SQL_CONNECTION_NAME = os.environ.get("CLOUD_SQL_CONNECTION_NAME")
+
+    # Initialize Cloud Storage client
     storage_client = storage.Client()
 
     # Download the CSV content
@@ -87,8 +99,8 @@ def etl_csv_to_cloudsql(cloud_event):
     )
 
     rows_inserted = 0
-    for row in reader:
 
+    for row in reader:
         conn.execute(
             insert_statement,
             {
@@ -103,6 +115,7 @@ def etl_csv_to_cloudsql(cloud_event):
                 "Balance": row[8],
             },
         )
+
         rows_inserted += 1
 
     conn.commit()
