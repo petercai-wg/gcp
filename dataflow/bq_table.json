@@ -1,0 +1,46 @@
+{
+    "BigQuery Schema": [
+        {
+            "name": "TransactionDate",
+            "type": "TIMESTAMP",
+            "mode": "REQUIRED"
+        },
+        {
+            "name": "SequenceNumber",
+            "type": "INTEGER",
+            "mode": "REQUIRED"
+        },
+        {
+            "name": "ServiceProvider",
+            "type": "STRING",
+            "mode": "REQUIRED"
+        },
+        {
+            "name": "Location",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "Type",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "Service",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "Discount",
+            "type": "FLOAT"
+        },
+        {
+            "name": "Amount",
+            "type": "FLOAT"
+        },
+        {
+            "name": "Balance",
+            "type": "FLOAT"
+        }
+    ]
+}
