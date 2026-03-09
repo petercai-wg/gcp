@@ -1,0 +1,10 @@
+{
+    "name": "function ETL GS to BigQuery",
+    "version": "1.0.0",
+    "description": "cloud function to load CSV file from GCS to BigQuery",
+    "dependencies": {
+        "@google-cloud/functions-framework": "^3.0.0",
+        "@google-cloud/storage": "^5.18.3",
+        "@google-cloud/bigquery": "^5.7.0"
+    }
+}
