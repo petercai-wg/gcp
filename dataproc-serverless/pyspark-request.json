@@ -1,0 +1,20 @@
+{
+  "pysparkBatch": {
+    "mainPythonFileUri": "gs://peter-pyspark20260315/dataproc/etl_main.py",
+    "args": [
+      "--app-name",
+      "dataproc-app",
+      "--input",
+      "gs://peter-pyspark20260315/go-202512.csv",
+      "--output",
+      "my_df_etl.go_txn",
+      "--temp-gcs-bucket",
+      "gs://peter-pyspark20260315/temp"
+    ]
+  },
+  "environmentConfig": {
+    "executionConfig": {
+      "subnetworkUri": "projects/qwiklabs-gcp-03-fb9bc53c69ac/regions/us-west1/subnetworks/spark-subnet"
+    }
+  }
+}
