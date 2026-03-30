@@ -1,0 +1,37 @@
+- randomgen_function:
+    call: http.get
+    args:
+        url: https://northamerica-northeast2-$PROJECT_ID.cloudfunctions.net/randomgen-function 
+    result: randomgen_result
+- multiply_function:
+    call: http.post
+    args:
+        url: https://northamerica-northeast2-$PROJECT_ID.cloudfunctions.net/multiply-function 
+        body:
+            input: ${randomgen_result.body.random}
+    result: multiply_result
+- log_function:
+    call: http.get
+    args:
+        url: https://api.mathjs.org/v4/
+        query:
+            expr: ${"log(" + string(multiply_result.body.multiplied) + ")"}
+    result: log_result
+- floor_function:
+    call: http.post
+    args:
+        url: https://my-floor-987799526902.northamerica-northeast2.run.app
+        auth:
+            type: OIDC
+        body:
+            input: ${log_result.body}
+    result: floor_result     
+- create_output_map:
+    assign:
+      - outputMap:
+          randomResult: ${randomgen_result}
+          multiplyResult: ${multiply_result}
+          logResult: ${log_result}
+          floorResult: ${floor_result}
+- return_result:
+    return: ${outputMap}
