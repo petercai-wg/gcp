@@ -20,7 +20,7 @@
 - floor_function:
     call: http.post
     args:
-        url: https://my-floor-987799526902.northamerica-northeast2.run.app
+        url: https://my-floor-$PROJECT_NUMBER.northamerica-northeast2.run.app
         auth:
             type: OIDC
         body:

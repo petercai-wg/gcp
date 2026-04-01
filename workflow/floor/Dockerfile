@@ -1,13 +1,14 @@
 # Use an official lightweight Python image.
 # https://hub.docker.com/_/python
-FROM python:3.7-slim
+FROM python:3.11-slim
 
-# Install production dependencies.
-RUN pip install Flask gunicorn
-
-# Copy local code to the container image.
 WORKDIR /app
-COPY . .
+
+COPY requirements.txt /app/ 
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY *.py /app/
 
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
